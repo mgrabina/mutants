@@ -15,7 +15,7 @@ import org.junit.Assert;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ServicesTestConfig.class)
-public class DetectionServiceTest {
+public class DetectionServiceImplTest {
 
     // Add utils methods tests here...
 
