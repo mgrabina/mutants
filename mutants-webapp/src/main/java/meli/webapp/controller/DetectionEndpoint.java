@@ -1,6 +1,8 @@
 package meli.webapp.controller;
 
+import meli.exceptions.InvalidDna;
 import meli.interfaces.DetectionService;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+
 import meli.webapp.dtos.*;
 
 
@@ -28,16 +32,23 @@ public class DetectionEndpoint {
     @Autowired
     private DetectionService detectionService;
 
+    /**
+     * Retrieves 200 (OK) if the given dna refers to a mutant or 403 otherwise.
+     *
+     * @param dnaDto    The given dna to analyze
+     * @return          A HTTP {@link Response} indicating the result of the analysis.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response detectMutant(DnaDto dnaDto) {
-//        LOGGER.info("New detection required at {}", LocalTime.now(), );
-//        LOGGER.info("New detection required at {}", LocalTime.now());
-//        LOGGER.debug("Detection required {}", dnaDto.);
-//        LOGGER.warn("Hello, world! This is a warning log! Time is {}", LocalTime.now());
-//        LOGGER.error("Hello, world! This is an error log!! Time is {}", LocalTime.now());
-        if (detectionService.isMutant(dnaDto.getDnaCode()))
-            return Response.ok().build();
+        LOGGER.info("New detection required at {}", LocalTime.now());
+        LOGGER.debug("Detection required {}", Arrays.toString(dnaDto.getDnaCode()));
+        try {
+            if (detectionService.isMutant(dnaDto.getDnaCode()))
+                return Response.ok().build();
+        } catch (InvalidDna exception){
+            return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).build();
+        }
         return Response.status(Response.Status.FORBIDDEN).build();
     }
 }

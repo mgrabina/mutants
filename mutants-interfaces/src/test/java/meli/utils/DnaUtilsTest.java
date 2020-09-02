@@ -15,7 +15,7 @@ import org.junit.Assert;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = UtilsTestConfig.class)
-public class UtilsTest {
+public class DnaUtilsTest {
 
     // Add utils methods tests here...
 

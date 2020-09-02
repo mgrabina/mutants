@@ -1,16 +1,28 @@
 package meli.webapp.dtos;
 
+/**
+ * Dto in order to recieve the dna information.
+ * Can be filled with more information in the future.
+ */
 public class DnaDto {
-    private String[] dnaCode;
+
+    /**
+     * The dna sequence itself.
+     */
+    private String[] dna;
 
     // Default constructor for Jersey
     public DnaDto(){}
 
-    public String[] getDnaCode() {
-        return dnaCode;
+    public DnaDto(String[] dna) {
+        this.dna = dna;
     }
 
-    public void setDnaCode(String[] dnaCode) {
-        this.dnaCode = dnaCode;
+    public String[] getDnaCode() {
+        return dna;
+    }
+
+    public void setDna(String[] dna) {
+        this.dna = dna;
     }
 }

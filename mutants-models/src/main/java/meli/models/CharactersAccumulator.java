@@ -3,65 +3,44 @@ package meli.models;
 import java.util.Optional;
 
 /**
- * A sample model
+ * A custom accumulator that coordinates an array of Character and an array of Integers
+ * where the accumulation of a character corresponds to the value in the same index in the integer's array.
  */
-public class Accumulator {
+public class CharactersAccumulator {
 
+    /**
+     * The characters to be tracked
+     */
     Character[] values;
-    int[] accumulator;
-    int size;
-    int sequencesCount = 0;
-    int currentIndex = 0;
-    TYPE type;
-    char aux;
-    int auxAccum;
 
-    public Accumulator(Character[] values, int[] accumulator, TYPE type) {
+    /**
+     * The actual quantities of repeated characters, corresponding to 'values' array.
+     */
+    int[] accumulator;
+
+    /**
+     * The size of the arrays
+     */
+    int size;
+
+    /**
+     * The current position of the internal iterator
+     */
+    int currentIndex = 0;
+
+    public CharactersAccumulator(Character[] values, int[] accumulator) {
         this.values = values;
         this.accumulator = accumulator;
         this.size = values.length;
-        this.type = type;
-    }
-
-
-    public void saveAux(){
-        this.aux = this.values[currentIndex];
-        this.auxAccum = this.accumulator[currentIndex];
-    }
-
-    public void cleanAux(){
-        this.aux = '0';
-        this.auxAccum = 0;
-    }
-
-
-    public void setNewCurrent(char c){
-        values[currentIndex] = c;
-        accumulator[currentIndex] = 1;
-    }
-
-    public char getAux() {
-        return aux;
-    }
-
-    public void setAux(char aux) {
-        this.aux = aux;
-    }
-
-    public int getAuxAccum() {
-        return auxAccum;
-    }
-
-    public void setAuxAccum(int auxAccum) {
-        this.auxAccum = auxAccum;
-    }
-
-    public void setValue(int index, char c){
-        values[index] = c;
     }
 
     public void setCurrentValue(char c){
         values[currentIndex] = c;
+    }
+
+    public void setNewCurrent(char c){
+        values[currentIndex] = c;
+        accumulator[currentIndex] = 1;
     }
 
     public Optional<Character> getValue(int index){
@@ -90,6 +69,7 @@ public class Accumulator {
 
     public void nextIndex(){
         if (this.currentIndex + 1 == size){
+            // Avoid overflow
             this.currentIndex = 0;
             return;
         }
@@ -98,24 +78,5 @@ public class Accumulator {
 
     public int getCurrentIndex() {
         return currentIndex;
-    }
-
-    public void incrementCounter(){
-        this.sequencesCount++;
-    }
-
-    public int getSequencesCount() {
-        return sequencesCount;
-    }
-
-    public TYPE getType() {
-        return type;
-    }
-
-    public enum TYPE {
-        HORIZONTAL,
-        VERTICAL,
-        D1,
-        D2
     }
 }
