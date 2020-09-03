@@ -32,6 +32,12 @@
             <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>meli</groupId>
+            <artifactId>mutants-persistence</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- External libraries -->
         <!-- Servlet stuff -->

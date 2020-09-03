@@ -2,8 +2,10 @@ package meli.services;
 
 import meli.exceptions.InvalidDna;
 import meli.interfaces.DetectionService;
+import meli.interfaces.StatisticsDao;
 import meli.models.Constants;
 import meli.models.DnaAccumulator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
@@ -12,6 +14,9 @@ import java.util.Set;
  */
 @Service
 public class DetectionServiceImpl implements DetectionService {
+
+    @Autowired
+    private StatisticsDao statisticsDao;
 
     /**
      * This function provides a logic for determining whether a dna corresponds to a mutant or not, based on the
@@ -38,10 +43,27 @@ public class DetectionServiceImpl implements DetectionService {
                 final boolean isLast = (j == dnaLength - 1);
                 DnaAccumulators.parallelStream().forEach(a -> DnaUtils.updateDnaAccumulator(a, letter, isLast));
                 if (DnaUtils.calculateMutantSequences(DnaAccumulators) >= Constants.MINIMUM_SEQUENCE_TO_BE_MUTANT) {
+                    saveDna(dna, true);
                     return true;
                 }
             }
         }
+        saveDna(dna, false);
         return false;
+    }
+
+    /**
+     * Async
+     *
+     * @param dna
+     * @param isMutant
+     */
+    private void saveDna(String[] dna, Boolean isMutant){
+        new Thread(new Runnable() {
+            public void run() {
+                if(!statisticsDao.findByCode(dna).isPresent())
+                    statisticsDao.registerNewDna(dna, isMutant);
+            }
+        }).start();
     }
 }

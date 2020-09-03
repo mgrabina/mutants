@@ -15,7 +15,7 @@ import org.junit.Assert;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PersistenceTestConfig.class)
-public class SampleDaoTest {
+public class StatisticsDaoImplTest {
 
     // Add utils methods tests here...
 
