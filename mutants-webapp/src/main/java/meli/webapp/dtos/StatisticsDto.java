@@ -2,10 +2,24 @@ package meli.webapp.dtos;
 
 import meli.models.Statistics;
 
+/**
+ * Dto for modeling the statistics to send
+ */
 public class StatisticsDto {
 
+    /**
+     * The quantity of mutants analyzed
+     */
     private long count_mutant_dna;
+
+    /**
+     * The quantity of humans analyzed
+     */
     private long count_human_dna;
+
+    /**
+     * The ratio of mutants/total analyzed
+     */
     private double ratio;
 
     public StatisticsDto(Statistics stats){

@@ -44,7 +44,7 @@ public class DetectionEndpoint {
         LOGGER.info("New detection required at {}", LocalTime.now());
         LOGGER.debug("Detection required {}", Arrays.toString(dnaDto.getDnaCode()));
         try {
-            if (detectionService.isMutant(dnaDto.getDnaCode()))
+            if (detectionService.checkIfMutantAndSave(dnaDto.getDnaCode()))
                 return Response.ok().build();
         } catch (InvalidDna exception){
             return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).build();

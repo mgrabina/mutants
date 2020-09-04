@@ -5,4 +5,5 @@ package meli.interfaces;
  */
 public interface DetectionService  {
     boolean isMutant(String[] dna);
+    boolean checkIfMutantAndSave(String[] dna);
 }

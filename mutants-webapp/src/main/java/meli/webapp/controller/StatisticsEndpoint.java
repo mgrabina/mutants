@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 
 /**
- * Main endpoints path of the system containing all endpoints under the path /stats/ (i.e. statistics).
+ * All endpoints under the path /stats/ (i.e. for retrieving mutants statistics).
  */
 @Path("stats")
 @Component

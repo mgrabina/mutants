@@ -13,12 +13,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import org.junit.Test;
 import org.junit.Assert;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * Testing for the detection service
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ServicesTestConfig.class)
+@ContextConfiguration(classes = ServicesTestConfig.class, loader = AnnotationConfigContextLoader.class)
 public class DetectionServiceImplTest {
 
     @Autowired

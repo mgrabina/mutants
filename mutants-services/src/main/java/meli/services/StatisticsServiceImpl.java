@@ -6,12 +6,20 @@ import meli.models.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The service responsible of managing the logic of statistics
+ */
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
 
     @Autowired
     private StatisticsDao statisticsDao;
 
+    /**
+     * Retrieves the current {@link Statistics}, processing database records.
+     *
+     * @return     A {@link Statistics} object with the required calculations.
+     */
     @Override
     public Statistics generateStatistics() {
         long mutants = statisticsDao.countByIfMutants(true);

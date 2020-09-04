@@ -22,7 +22,7 @@ import java.util.Properties;
  * Configuration class. Add Spring Beans here.
  */
 @Configuration
-@ComponentScan({"meli.webapp.controller", "meli.services", "meli.persistence"})
+@ComponentScan({"meli.webapp.controller", "meli.persistence", "meli.services"})
 @EnableTransactionManagement
 public class WebConfig {
 
@@ -41,7 +41,7 @@ public class WebConfig {
         factoryBean.setJpaVendorAdapter(vendorAdapter);
 
         final Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.default_schema", "public");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL92Dialect");
         properties.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");	// For boot performance

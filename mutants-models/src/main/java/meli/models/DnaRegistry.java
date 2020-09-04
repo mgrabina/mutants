@@ -18,10 +18,26 @@ public class DnaRegistry {
     @Column(name = "ismutant")
     private Boolean isMutant;
 
+    @Column(name = "sequence_length")
+    private int length;
+
     public DnaRegistry(){} // For Hibernate
 
-    public DnaRegistry(String[] code, Boolean isMutant){
+    public DnaRegistry(String[] code, Boolean isMutant, int length){
         this.isMutant = isMutant;
         this.code = String.join("", code);
+        this.length = length;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Boolean getMutant() {
+        return isMutant;
+    }
+
+    public int getLength() {
+        return length;
     }
 }
