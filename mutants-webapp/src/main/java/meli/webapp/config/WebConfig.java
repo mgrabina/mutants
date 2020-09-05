@@ -62,7 +62,12 @@ public class WebConfig {
 //        String password="f7dd267936bf25c605eff67f009bb8ff4b8d5bcd7e1386948ba19e0de8b1b6b6";
 
 //		DEV
-		String url= "jdbc:postgresql://localhost:5432/mutants";
+//		String url= "jdbc:postgresql://localhost:5432/mutants";
+		//PROD
+		String url= "jdbc:postgresql://mutants.ca6kkmjlyty6.us-east-1.rds.amazonaws.com:5432/ebdb";
+
+
+
 		String username="meli";
 		String password="secret_password";
 

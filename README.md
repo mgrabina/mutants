@@ -1,11 +1,16 @@
 # X-Men Mutants Detector
 
 ## Design
-
+It's a multi-module project, which includes model, interfaces, persistence, service and webapp modules.
+Made with Java (Maven, Spring, JUnit, Jersey, ...), designed to scale (in runtime and in functionality), 
+and focused in reducing time complexity in all layers.
 
 ## API
-The API has been deployed and can be reached at:
+The API has been deployed at AWS Beanstalk (and cofigured for autoscaling) with a AWS RDS database and can be reached at:
 
+    http://mutantstomcat-env.eba-m2equmas.us-east-1.elasticbeanstalk.com
+
+*AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java (among others).*
 ### Requests
 #### Detection Test
     $   POST /mutants
@@ -99,6 +104,8 @@ The following instructions will set the development environment in your local ma
 4. Deploy *.war* file in a web server
 
 4.a This can be done locally (with a Tomcat server for example)
+
+    https://tomcat.apache.org/tomcat-8.0-doc/deployer-howto.html
 
 4.b Also can be done in a cloud (heroku for a simple example)
 
