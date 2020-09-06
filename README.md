@@ -1,4 +1,5 @@
 # X-Men Mutants Detector
+*This document includes also design specifications that may help the reader to understand how the system was developed and thinked, for build instructions please scroll down.*
 
 ## Design
 It's a multi-module project, which includes model, interfaces, persistence, service and webapp modules.
@@ -6,11 +7,19 @@ Made with Java (Maven, Spring, JUnit, Jersey, ...), designed to scale (in runtim
 and focused in reducing time complexity in all layers.
 
 ## API
-The API has been deployed at AWS Beanstalk (and cofigured for autoscaling) with a AWS RDS database and can be reached at:
+The API has been deployed at AWS Beanstalk (and cofigured for autoscaling) with an AWS RDS database, and can be reached at:
 
     http://mutantstomcat-env.eba-m2equmas.us-east-1.elasticbeanstalk.com
 
-*AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java (among others).*
+*AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java (among others). For more information regarding how autoscale works in Elastic Beanstalk please visit: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.as.html (basically auto manages EC2 instances on demand based on triggers such as requests quantity that can be configured at Beanstalk's environments)*
+
+The API was stress tested with two tools: 
+
+- https://artillery.io/
+- https://github.com/paoliniluis/node-load-tester-graph
+
+And monitored via the AWS Elastic Beanstalk's monitoring tool, indicating expected behaviour for more than 1000 requests per second.
+
 ### Requests
 #### Detection Test
     $   POST /mutants
