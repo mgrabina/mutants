@@ -47,6 +47,30 @@ public class DetectionServiceImplTest {
     //////////////////////////////////////////////////////////////////////////////
 
     @Test
+    public void crossedDiagonalSequences() {
+        String[] dna = {"ACTCA","CATAC","GGACT","GACAT","ATGCA"};
+        Assert.assertTrue("Should be mutant", detectionService.isMutant(dna));
+    }
+
+    @Test
+    public void LikeACenteredPlusMutant() {
+        String[] dna = {"AATAA", "AATAA", "TTTTT", "AATAA", "AATAA"};
+        Assert.assertTrue("Should be mutant", detectionService.isMutant(dna));
+    }
+
+    @Test
+    public void CenteredSimetricButNotEnough() {
+        String[] dna = {"AATAA", "AATAA", "TTGTT", "AATAA", "AATAA"};
+        Assert.assertFalse("Should not be mutant", detectionService.isMutant(dna));
+    }
+
+    @Test
+    public void notEnoughDiagonalSequences() {
+        String[] dna = {"ACTCA","CATAC","GGACT","GCCAA","TTGCC"};
+        Assert.assertFalse("Should not be mutant", detectionService.isMutant(dna));
+    }
+
+    @Test
     public void onlyOneSequenceNotMutant() {
         String[] dna = {"AAAA","CTGT","TGCT","CCTG"};
         Assert.assertFalse("Should not be mutant", detectionService.isMutant(dna));

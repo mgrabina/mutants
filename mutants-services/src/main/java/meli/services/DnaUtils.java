@@ -79,7 +79,7 @@ public abstract class DnaUtils {
                 } else if (a.getCurrentValue().isPresent()){
                     a.saveAux();
                 }
-                if (a.getAux() == letter && a.getCurrentValue().isPresent()){
+                if (lastAux == letter && a.getCurrentValue().isPresent()){
                     a.setCurrentValue(lastAux);
                     a.setAccumulation(a.getCurrentIndex(), lastAuxAccum + 1);
                     if (a.getCurrentAccumulation() == Constants.MINIMUM_IDENTICAL_BASE_COUNT){
@@ -90,14 +90,12 @@ public abstract class DnaUtils {
                 }
                 break;
             case D2:    // From the right to the left: Inserts in the last place and 'shifts' to the left
-                if (isLast || (!a.getValue(a.getCurrentIndex() + 1).isPresent()
-                        || !a.getValue(a.getCurrentIndex() + 1).get().equals(letter))) {
-                    a.setNewCurrent(letter);
-                } else {
-                    a.incrementCurrentAccumulation();
-                    if (a.getCurrentAccumulation() == Constants.MINIMUM_IDENTICAL_BASE_COUNT) {
-                        a.incrementCounter();
-                    }
+                a.setNewCurrent(letter);
+                if (!isLast && a.getValue(a.getCurrentIndex() + 1).isPresent() && a.getValue(a.getCurrentIndex() + 1).get().equals(letter)){
+                    a.setAccumulation(a.getCurrentIndex(), a.getAccumulation(a.getCurrentIndex() + 1) + 1);
+                }
+                if (a.getCurrentAccumulation() == Constants.MINIMUM_IDENTICAL_BASE_COUNT) {
+                    a.incrementCounter();
                 }
                 break;
         }
