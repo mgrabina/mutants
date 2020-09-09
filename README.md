@@ -7,9 +7,7 @@ Made with Java (Maven, Spring, JUnit, Jersey, ...), designed to scale (in runtim
 and focused in reducing time complexity in all layers.
 
 ## API
-The API has been deployed at AWS Beanstalk (and cofigured for autoscaling) with an AWS RDS database, and can be reached at:
-
-    http://mutantstomcat-env.eba-m2equmas.us-east-1.elasticbeanstalk.com
+It is recommended to use:
 
 *AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java (among others). For more information regarding how autoscale works in Elastic Beanstalk please visit: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.as.html (basically auto manages EC2 instances on demand based on triggers such as requests quantity that can be configured at Beanstalk's environments)*
 
